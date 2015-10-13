@@ -1,86 +1,24 @@
 <!doctype html>
 <html>
 <head>
-	<title>infopage</title>
+	<title>Welcome</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script>
-		function abo(){
-			var element = document.getElementById("articles");
-			var arti = document.createElement("article");
-			var para = document.createElement("p");
-			var node = document.createTextNode("magische text");
-			para.appendChild(node);
-			arti.appendChild(para);
-			element.appendChild(arti);
-		}
-		function abos(){
-			var element = document.getElementById("table");
-			var arti = document.createElement("tr");
-			var para = document.createElement("td");
-			para.appendChild(document.createTextNode("magische text"));
-			var para2 = document.createElement("td");
-			para2.appendChild(document.createTextNode("magische text"));
-			arti.appendChild(para);
-			arti.appendChild(para2);
-			element.appendChild(arti);
-		}
-	</script>
+	<script src="jquery.js"></script>
+	<script src="script.js"></script>
 </head>
-<body>
-	<nav>
-		<a onclick="" href="#">HTML</a>
-	</nav>
-	<section id ="articles">
-		<h2>Miniproject internettechnologieen</h2>
-		<article>
-			<header>
-				<h3>Het project</h3>
-			</header>
-			<p>Het project dat ik ga maken is een persoonlijke homepage. Deze pagina krijgt allerlei interessante dingen.</p>
-		</article>
-		<section class="main">
-			<article>
-				<h4>Een tabel met mogelijke functies</h4>
-				<table>
-					<tbody id="table">
-						<tr>
-							<th>Functie</th>
-							<th>Beschrijving</th>
-						</tr>
-						<tr>
-							<td>Feeds binnenhalen</td>
-							<td>Er komen live updates van mijn favoriete feeds</td>
-						</tr>
-						<tr>
-							<td>Meerdere zoekmachines</td>
-							<td>Er moet een zoekmachine komen die naar meerdere engines kan vragen</td>
-						</tr>
-						<tr>
-							<td>Goede links</td>
-							<td>Er komen mooie links naar nuttige dingen</td>
-						</tr>
-					</tbody>
-				</table>
-			</article>
-			<aside>
-				<h5>Dingen die hiermee te maken hebben</h5>
-				<ul>
-					<li>RSS</li>
-					<li><a href="https://en.wikipedia.org/wiki/JavaScript">javascript</a></li>
-					<li><a onclick="abos();" href="#">DOM</a></li>
-					<li><a onclick="abo();" href="#">HTML</a></li>
-					<li>CSS</li>
-				</ul>
-				<img src="js.svg" height="50" alt="javascript icon">
-			</aside>
-		</section>
-	</section>
-	<section>
-		<h6>Informatie over de maker</h6>
-		<footer>
-			<p>Made by: Jim van Abkoude</p>
-			<p>Contact information: <a href="jim@reupload.nl">jim@reupload.nl</a>.</p>
-		</footer>
-	</section>
+<body onload="organiseMenu();">
+	<div class="header">
+		<h1 class="inheriting">
+			Hello there.
+		</h1>
+		<div id="searchblock">
+			<div id="pre"></div>
+			<div id="searcher"><input id="inputbox" type="text" name="zoekert" placeholder="What are you looking for?" oninput="inputhandling();" onfocus="focuss();" onblur="defocus();"></div>
+		</div>
+	</div>
+	<div id="subtext">
+		<div id="content"></div>
+		<div id="links"></div>
+	</div>
 </body>
 </html>

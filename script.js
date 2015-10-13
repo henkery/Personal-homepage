@@ -1,11 +1,13 @@
 happen = false;
 var max = 5;
 var min = 1;
+instable = true;
 var prevtext;
 store = {"cats":{
-	"boards":[{"name":"not /a/","url":"www.fufufu.moe"},{"name":"/a/","url":"4chan.org/a/"},{"name":"/v/","url":"4chan.org/v/"}],
+	"fun":[{"name":"LinkedIn","url":"www.linkedin.com"},{"name":"9gag","url":"9gag.com"}],
 	"social":[{"name":"youtube","url":"www.youtube.com"}, {"name":"facebook","url":"facebook.com"}],
-	"other":[{"name":"shitty radio","url":"edenofthewest.com"},{"name":"madokami","url":"manga.madokami.com"}]
+	"news":[{"name":"nu.nl","url":"www.nu.nl"}, {"name":"NOS","url":"nos.nl"}],
+	"other":[{"name":"Radio 1","url":"radio1.nl"}]
 }};
 
 function organiseMenu() {
@@ -58,13 +60,32 @@ function inputhandling() {
 		var text = document.getElementById("inputbox").value;
 		var url = "http://api.duckduckgo.com/?q="+text+"&format=json&t=myhomepage&callback=?";
 		$.getJSON(url, function(result){
-			var base = document.getElementById("content");
+			var base = document.getElementById("links");
 			base.innerHTML = "";
-			for (var i = result.RelatedTopics.length - 1; i >= 0; i--) {
-				var newt = document.createElement("div");
-				newt.innerHTML = result.RelatedTopics[i].Result;
-				base.appendChild(newt);
-			};
+			var holder = document.createElement("div");
+			var overholder = document.createElement("div");
+			overholder.className = "overholder";
+			holder.className = "searchholder";
+			for (key in result.RelatedTopics)
+			{
+				if (typeof result.RelatedTopics[key].Text != 'undefined') {
+					var link = document.createElement("a");
+					var newt = document.createElement("div");
+					link.href = result.RelatedTopics[key].FirstURL;
+					link.className = "searchitem";
+					newt.innerHTML = result.RelatedTopics[key].Text;
+					if (result.RelatedTopics[key].Icon.URL != "") {
+						var img = document.createElement("img");
+						img.className = "searchimage";
+						img.src = result.RelatedTopics[key].Icon.URL;
+						link.appendChild(img);
+					}
+					link.appendChild(newt);
+					holder.appendChild(link);
+				}
+			}
+			overholder.appendChild(holder);
+			base.appendChild(overholder);
 		});
 	}
 }
